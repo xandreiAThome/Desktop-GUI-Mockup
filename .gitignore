@@ -1,0 +1,73 @@
+# Build directories
+/out/
+/build/
+/Debug/
+/Release/
+/cmake-build-debug/
+/cmake-build-release/
+
+# Visual Studio
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.aps
+*.ncb
+*.opendb
+*.VC.db
+*.ipch
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+*.make
+
+# Compiled objects and libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.ilk
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# vcpkg
+vcpkg_installed/
+packages/
+
+# Python/misc
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# OS-specific
+Thumbs.db
+.DS_Store
