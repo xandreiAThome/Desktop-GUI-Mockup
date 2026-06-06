@@ -7,6 +7,7 @@ struct AppState {
 
 	bool shouldQuit = false;
 	std::string clockString;
+	std::string dateString;
 
 	void update();
 };

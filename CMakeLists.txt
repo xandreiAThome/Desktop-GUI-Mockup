@@ -22,7 +22,7 @@ file(GLOB_RECURSE SOURCES
     src/utils/*.cpp
 )
 
-add_executable(Desktop-GUI-Mockup ${SOURCES} "src/AppState.h" "src/windows/BaseWindow.h" "src/desktop/Desktop.h" "src/windows/WindowManager.h" "src/utils/Clock.h" "src/utils/TextureLoader.h")
+add_executable(Desktop-GUI-Mockup ${SOURCES} "src/AppState.h" "src/windows/BaseWindow.h" "src/desktop/Desktop.h" "src/windows/WindowManager.h"  "src/utils/TextureLoader.h" "src/AppState.cpp" "src/desktop/Desktop.cpp" "src/utils/TextureLoader.cpp")
 
 # --- C++ standard ---
 set_property(TARGET Desktop-GUI-Mockup PROPERTY CXX_STANDARD 20)
@@ -37,4 +37,14 @@ target_link_libraries(Desktop-GUI-Mockup PRIVATE
     glfw
     imgui::imgui
     glad::glad
+)
+
+# --- Copy assets to build output directory ---
+add_custom_command(TARGET Desktop-GUI-Mockup POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory
+        $<TARGET_FILE_DIR:Desktop-GUI-Mockup>/assets
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:Desktop-GUI-Mockup>/assets
+    COMMENT "Copying assets to output directory"
 )
