@@ -7,6 +7,10 @@
 #include <desktop/Desktop.h>
 #include <AppState.h>
 
+#include "windows/DummyWindow.h"
+#include "windows/WindowManager.h"
+#include "taskbar/Taskbar.h"
+
 // Theme
 static void ApplyOSTheme() {
     ImGuiStyle& s = ImGui::GetStyle();
@@ -57,6 +61,16 @@ int main() {
 
     Desktop desktop;
     desktop.init("assets/starry-night.jpg");
+
+    Taskbar taskbar;
+    taskbar.init();
+
+    // windows init
+    WindowManager wm;
+    wm.registerWindow(std::make_unique<DummyWindow>("app1", &AppState::get().app1Open));
+    wm.registerWindow(std::make_unique<DummyWindow>("app2", &AppState::get().app2Open));
+    wm.registerWindow(std::make_unique<DummyWindow>("app3", &AppState::get().tmOpen));
+
     // main loop
 
     while (!glfwWindowShouldClose(window) && !AppState::get().shouldQuit) {
@@ -73,7 +87,14 @@ int main() {
         glfwGetFramebufferSize(window, &fbW, &fbH);
         ImVec2 displaySize = { (float)fbW, (float)fbH };
         desktop.render(ImGui::GetBackgroundDrawList(), displaySize);
+
+        // taskbar
+        taskbar.render(displaySize);
         
+        // windows
+        wm.renderAll();
+
+
         ImGui::Render();
         glViewport(0, 0, fbW, fbH);
         glClearColor(0.f, 0.f, 0.f, 1.f);

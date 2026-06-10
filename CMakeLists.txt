@@ -6,7 +6,7 @@ if(POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project("Desktop-GUI-Mockup")
+project(Desktop-GUI-Mockup CXX)
 
 # --- Find packages installed by vcpkg ---
 find_package(OpenGL REQUIRED)
@@ -22,7 +22,7 @@ file(GLOB_RECURSE SOURCES
     src/utils/*.cpp
 )
 
-add_executable(Desktop-GUI-Mockup ${SOURCES} "src/AppState.h" "src/windows/BaseWindow.h" "src/desktop/Desktop.h" "src/windows/WindowManager.h"  "src/utils/TextureLoader.h" "src/AppState.cpp" "src/desktop/Desktop.cpp" "src/utils/TextureLoader.cpp")
+add_executable(Desktop-GUI-Mockup ${SOURCES} "src/AppState.h" "src/windows/BaseWindow.h" "src/desktop/Desktop.h" "src/windows/WindowManager.h"  "src/utils/TextureLoader.h" "src/AppState.cpp" "src/desktop/Desktop.cpp" "src/utils/TextureLoader.cpp" "src/windows/WindowManager.cpp" "src/windows/DummyWindow.h" "src/taskbar/Taskbar.h" "src/taskbar/Taskbar.cpp")
 
 # --- C++ standard ---
 set_property(TARGET Desktop-GUI-Mockup PROPERTY CXX_STANDARD 20)

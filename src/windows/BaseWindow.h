@@ -1,3 +1,5 @@
+#pragma once
+
 // BaseWindow.h
 class BaseWindow {
 public:
