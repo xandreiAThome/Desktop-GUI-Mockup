@@ -7,7 +7,6 @@
 #include <desktop/Desktop.h>
 #include <AppState.h>
 
-#include "windows/DummyWindow.h"
 #include "windows/WindowManager.h"
 #include "taskbar/Taskbar.h"
 #include "windows/CalculatorWindow.h"
@@ -67,11 +66,10 @@ int main() {
     Taskbar taskbar;
     taskbar.init();
 
-    // windows init
-    WindowManager wm;
-    wm.registerWindow(std::make_unique<CalculatorWindow>(&AppState::get().app1Open));
-    wm.registerWindow(std::make_unique<NotepadWindow>(&AppState::get().app2Open));
-    wm.registerWindow(std::make_unique<DummyWindow>("app3", &AppState::get().tmOpen));
+    WindowManager::get().registerWindow("Calculator", std::make_unique<CalculatorWindow>());
+    WindowManager::get().registerWindow("Notepad", std::make_unique<NotepadWindow>());
+    WindowManager::get().registerWindow("Task Manager", std::make_unique<CalculatorWindow>("Task Manager")); // CHANGE THIS
+   
 
     // main loop
 
@@ -94,7 +92,7 @@ int main() {
         taskbar.render(displaySize);
         
         // windows
-        wm.renderAll();
+        WindowManager::get().renderAll();
 
 
         ImGui::Render();

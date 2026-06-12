@@ -1,13 +1,17 @@
 #pragma once
 
 #include <memory>
-#include <vector>
+#include <unordered_map>
+#include <string>
 #include "BaseWindow.h"
 
 class WindowManager {
 public:
-    void registerWindow(std::unique_ptr<BaseWindow> win);
+    static WindowManager& get(); // singleton
+    void registerWindow(const std::string& name, std::unique_ptr<BaseWindow> win);
+    void showWindow(const std::string& name);
+    void hideWindow(const std::string& name);
     void renderAll();                 // Iterates and calls render() on open windows
 private:
-    std::vector<std::unique_ptr<BaseWindow>> m_windows;
+    std::unordered_map<std::string, std::unique_ptr<BaseWindow>> m_windows;
 };

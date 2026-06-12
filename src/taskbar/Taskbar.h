@@ -1,6 +1,15 @@
 #pragma once
 #include <imgui.h>
 #include <glad/glad.h>
+#include <string>
+#include <vector>
+
+struct TaskbarIcon {
+    std::string windowName;  // WindowManager target
+    GLuint texture = 0;
+    int width = 0;
+    int height = 0;
+};
 
 class Taskbar {
 public:
@@ -8,6 +17,5 @@ public:
 	void init();
 
 private:
-	GLuint m_taskManagerTex = 0;
-	int m_tmTexW = 0, m_tmTexH = 0;
+	std::vector<TaskbarIcon> m_icons;
 };

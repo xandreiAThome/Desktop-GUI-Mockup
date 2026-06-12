@@ -22,7 +22,7 @@ file(GLOB_RECURSE SOURCES
     src/utils/*.cpp
 )
 
-add_executable(Desktop-GUI-Mockup ${SOURCES} "src/AppState.h" "src/windows/BaseWindow.h" "src/desktop/Desktop.h" "src/windows/WindowManager.h"  "src/utils/TextureLoader.h" "src/AppState.cpp" "src/desktop/Desktop.cpp" "src/utils/TextureLoader.cpp" "src/windows/WindowManager.cpp" "src/windows/DummyWindow.h" "src/taskbar/Taskbar.h" "src/taskbar/Taskbar.cpp" "src/windows/CalculatorWindow.h" "src/windows/NotepadWindow.h")
+add_executable(Desktop-GUI-Mockup ${SOURCES} "src/AppState.h" "src/windows/BaseWindow.h" "src/desktop/Desktop.h" "src/windows/WindowManager.h"  "src/utils/TextureLoader.h" "src/AppState.cpp" "src/desktop/Desktop.cpp" "src/utils/TextureLoader.cpp" "src/windows/WindowManager.cpp"  "src/taskbar/Taskbar.h" "src/taskbar/Taskbar.cpp" "src/windows/CalculatorWindow.h" "src/windows/NotepadWindow.h" )
 
 # --- C++ standard ---
 set_property(TARGET Desktop-GUI-Mockup PROPERTY CXX_STANDARD 20)

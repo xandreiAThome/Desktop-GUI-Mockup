@@ -4,18 +4,19 @@
 
 class CalculatorWindow : public BaseWindow {
 public:
-    CalculatorWindow(bool* openFlag) {
-        this->openFlag = openFlag;
-    }
 
-    const char* title() const override { return "Calculator"; }
+    CalculatorWindow(): BaseWindow("Calculator")
+    {}
+
+    CalculatorWindow(const std::string& name): BaseWindow(name)
+    {}
 
     void render() override {
-        if (!openFlag || !*openFlag) return;
+        if (!openFlag) return;
 
         ImGui::SetNextWindowSize(ImVec2(240, 320), ImGuiCond_FirstUseEver);
 
-        if (ImGui::Begin(title(), openFlag, ImGuiWindowFlags_NoResize)) {
+        if (ImGui::Begin(getName().c_str(), &openFlag, ImGuiWindowFlags_NoResize)) {
             ImGui::BeginChild("DisplayBox", ImVec2(0, 40), true);
             ImGui::Text("42"); 
             ImGui::EndChild();
