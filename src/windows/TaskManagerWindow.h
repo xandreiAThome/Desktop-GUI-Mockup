@@ -47,7 +47,7 @@ public:
                                                    ImGuiTableFlags_ScrollY;
                     
                     // Data grid
-                    if (ImGui::BeginTable("ProcessesTable", 4, flags, ImVec2(0.0f, -FLT_MIN))) {
+                    if (ImGui::BeginTable("ProcessesTable", 4, flags)) {
                         // Freeze top row so headers remain when scrolling
                         ImGui::TableSetupScrollFreeze(0, 1); 
                         
