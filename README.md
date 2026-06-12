@@ -12,6 +12,10 @@ Desktop GUI mockup for **CSOPESY OS**, built with C++20, OpenGL, GLFW, and Dear 
 ```sh
 cmake --preset x64-debug
 cmake --build out/build/x64-debug
+
+For macOS:
+cmake --preset mac-debug
+cmake --build out/build/mac-debug
 ```
 
 ## Usage
