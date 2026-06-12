@@ -10,6 +10,8 @@
 #include "windows/DummyWindow.h"
 #include "windows/WindowManager.h"
 #include "taskbar/Taskbar.h"
+#include "windows/CalculatorWindow.h"
+#include "windows/NotepadWindow.h"
 
 // Theme
 static void ApplyOSTheme() {
@@ -67,8 +69,8 @@ int main() {
 
     // windows init
     WindowManager wm;
-    wm.registerWindow(std::make_unique<DummyWindow>("app1", &AppState::get().app1Open));
-    wm.registerWindow(std::make_unique<DummyWindow>("app2", &AppState::get().app2Open));
+    wm.registerWindow(std::make_unique<CalculatorWindow>(&AppState::get().app1Open));
+    wm.registerWindow(std::make_unique<NotepadWindow>(&AppState::get().app2Open));
     wm.registerWindow(std::make_unique<DummyWindow>("app3", &AppState::get().tmOpen));
 
     // main loop
