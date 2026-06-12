@@ -20,7 +20,7 @@ cmake --build out/build/mac-debug
 
 ## Usage
 
-Run the executable from `out/build/x64-debug/` (assets are copied automatically).
+Run the executable from `out/build/(OS)-debug/` (assets are copied automatically).
 
 ## Project Structure
 

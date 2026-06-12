@@ -11,6 +11,7 @@
 #include "taskbar/Taskbar.h"
 #include "windows/CalculatorWindow.h"
 #include "windows/NotepadWindow.h"
+#include "windows/TaskManagerWindow.h"
 
 // Theme
 static void ApplyOSTheme() {
@@ -68,7 +69,7 @@ int main() {
 
     WindowManager::get().registerWindow("Calculator", std::make_unique<CalculatorWindow>());
     WindowManager::get().registerWindow("Notepad", std::make_unique<NotepadWindow>());
-    WindowManager::get().registerWindow("Task Manager", std::make_unique<CalculatorWindow>("Task Manager")); // CHANGE THIS
+    WindowManager::get().registerWindow("Task Manager", std::make_unique<TaskManagerWindow>("Task Manager"));
    
 
     // main loop
@@ -85,7 +86,8 @@ int main() {
         // desktop layer
         int fbW, fbH;
         glfwGetFramebufferSize(window, &fbW, &fbH);
-        ImVec2 displaySize = { (float)fbW, (float)fbH };
+        // old version: ImVec2 displaySize = { (float)fbW, (float)fbH };
+        ImVec2 displaySize = ImGui::GetIO().DisplaySize;
         desktop.render(ImGui::GetBackgroundDrawList(), displaySize);
 
         // taskbar
