@@ -1,12 +1,27 @@
 #include "WindowManager.h"
 #include <memory>
+#include <string>
 
-void WindowManager::registerWindow(std::unique_ptr<BaseWindow> win) {
-	m_windows.push_back(std::move(win));
+// singleton
+WindowManager& WindowManager::get() {
+	static WindowManager instance;
+	return instance;
+}
+
+void WindowManager::registerWindow(const std::string& name, std::unique_ptr<BaseWindow> win) {
+	m_windows[name] = std::move(win);
+}
+
+void WindowManager::showWindow(const std::string& name) {
+	m_windows[name]->show();
+}
+
+void WindowManager::hideWindow(const std::string& name) {
+	m_windows[name]->hide();
 }
 
 void WindowManager::renderAll() {
-	for (const auto &win : m_windows) {
-		win->render();
+	for (auto& [name, window] : m_windows) {
+		window->render();
 	}
 }

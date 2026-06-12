@@ -2,9 +2,40 @@
 #include "AppState.h"
 #include "utils/TextureLoader.h"
 #include <imgui.h>
+#include "windows/WindowManager.h"
 
 void Taskbar::init() {
-    m_taskManagerTex = loadTexture("assets/taskmanager.png", m_tmTexW, m_tmTexH);
+    // Initialize icons
+    TaskbarIcon calculator;
+    calculator.windowName = "Calculator"; 
+    calculator.texture = loadTexture(
+        "assets/calculator.png",
+        calculator.width,
+        calculator.height
+    );
+
+    TaskbarIcon notepad;
+    notepad.windowName = "Notepad";
+    notepad.texture = loadTexture(
+        "assets/notepad.png",
+        notepad.width,
+        notepad.height
+    );
+
+    TaskbarIcon taskManager;
+    taskManager.windowName = "Task Manager"; 
+    taskManager.texture = loadTexture(
+        "assets/taskmanager.png",
+        taskManager.width,
+        taskManager.height
+    );
+
+    
+
+    m_icons.push_back(calculator);
+    m_icons.push_back(notepad);
+    m_icons.push_back(taskManager);
+
     
 }
 
@@ -47,23 +78,20 @@ void Taskbar::render(ImVec2 displaySize) {
     // Buttons
     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 100.0f);
 
-    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
-    if (ImGui::Button("App 1", buttonSize)) {
-        AppState::get().app1Open = true;
-    };
-    ImGui::PopStyleColor();
+    for (size_t i = 0; i < m_icons.size(); i++) {
+        TaskbarIcon& icon = m_icons[i];
 
-    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 1.0f, 0.0f, 1.0f));
-    ImGui::SameLine();
-    if (ImGui::Button("App 2", buttonSize)) {
-        AppState::get().app2Open = true;
-    };
-    ImGui::PopStyleColor();
+        if (ImGui::ImageButton(
+            icon.windowName.c_str(),
+            (ImTextureID)(intptr_t)icon.texture,
+            imageSize
+        )) {
+            WindowManager::get().showWindow(icon.windowName);
+        }
 
-    ImGui::SameLine();
-    if (ImGui::ImageButton("TMIcon", (ImTextureID)(intptr_t)m_taskManagerTex, imageSize)) {
-        AppState::get().tmOpen = true;
-    };
+        ImGui::SameLine();
+    }
+
     ImGui::PopStyleVar();
 
     ImGui::End();
