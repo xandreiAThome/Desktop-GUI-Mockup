@@ -73,36 +73,49 @@ void Desktop::drawClock(ImVec2 displaySize) {
 
 void Desktop::drawPowerButton(ImVec2 displaySize) {
     const float sz = 40.f, margin = 12.f;
+
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.f, 0.f));
+
     ImGui::SetNextWindowPos({ margin, margin });
     ImGui::SetNextWindowSize({ sz, sz });
     ImGui::SetNextWindowBgAlpha(0.f);
+
     ImGui::Begin("##power", nullptr,
         ImGuiWindowFlags_NoDecoration |
         ImGuiWindowFlags_NoMove |
-        ImGuiWindowFlags_NoSavedSettings);
+        ImGuiWindowFlags_NoSavedSettings |
+        ImGuiWindowFlags_NoScrollbar |
+        ImGuiWindowFlags_NoScrollWithMouse
+    );
 
+    ImGui::SetCursorPos({ 0.f, 0.f });
+
+    // Draw button
+    ImGui::PushStyleColor(ImGuiCol_Button, IM_COL32(0, 0, 0, 130));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, IM_COL32(40, 40, 40, 160));
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.f);
+
+    if (ImGui::Button("##pwrbtn", ImVec2(sz, sz))) {
+        AppState::get().shouldQuit = true;
+    };
+
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor(2);
+
+    // Draw power icon on top of button
     ImVec2      wPos = ImGui::GetWindowPos();
     ImDrawList* dl = ImGui::GetWindowDrawList();
     ImVec2      center = { wPos.x + sz * 0.5f, wPos.y + sz * 0.5f };
-
-    // Semi-transparent background pill
-    dl->AddRectFilled(
-        { wPos.x + 2.f, wPos.y + 2.f },
-        { wPos.x + sz - 2.f, wPos.y + sz - 2.f },
-        IM_COL32(0, 0, 0, 130), 8.f
+    
+    dl->AddCircle(center, 13.f, IM_COL32(255, 51, 51, 220), 32, 2.f);
+    dl->AddLine(
+        { center.x, center.y - 16.f },
+        { center.x, center.y - 3.f },
+        IM_COL32(255, 51, 51, 230),
+        2.5f
     );
 
-    // Power icon drawn on top
-    dl->AddCircle(center, 13.f, IM_COL32(255, 51, 51, 180), 32, 2.f);
-    dl->AddLine({ center.x, center.y - 14.f },
-        { center.x, center.y - 3.f },
-        IM_COL32(255, 51, 51, 200), 2.5f);
-
-    ImGui::SetCursorPos({ 0.f, 0.f });
-    if (ImGui::InvisibleButton("##pwrbtn", { sz, sz }))
-        AppState::get().shouldQuit = true;
-
     ImGui::End();
-    ImGui::PopStyleVar();
+    ImGui::PopStyleVar(2);
 }
