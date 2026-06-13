@@ -3,7 +3,7 @@
 #include "utils/TextureLoader.h"
 
 void Desktop::init(const std::string& wallpaperPath) {
-	m_wallpaperTex = loadTexture(wallpaperPath, m_texW, m_texH);
+	m_wallpaperTex = loadTexture(wallpaperPath);
 }
 
 void Desktop::render(ImDrawList* bgDrawList, ImVec2 displaySize) {

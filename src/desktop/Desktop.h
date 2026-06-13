@@ -14,5 +14,4 @@ private:
     void drawPowerButton(ImVec2 displaySize);
 
     GLuint m_wallpaperTex = 0;
-    int m_texW = 0, m_texH = 0;
 };

@@ -8,29 +8,15 @@ void Taskbar::init() {
     // Initialize icons
     TaskbarIcon calculator;
     calculator.windowName = "Calculator"; 
-    calculator.texture = loadTexture(
-        "assets/calculator.png",
-        calculator.width,
-        calculator.height
-    );
+    calculator.texture = loadTexture("assets/calculator.png");
 
     TaskbarIcon notepad;
     notepad.windowName = "Notepad";
-    notepad.texture = loadTexture(
-        "assets/notepad.png",
-        notepad.width,
-        notepad.height
-    );
+    notepad.texture = loadTexture("assets/notepad.png");
 
     TaskbarIcon taskManager;
     taskManager.windowName = "Task Manager"; 
-    taskManager.texture = loadTexture(
-        "assets/taskmanager.png",
-        taskManager.width,
-        taskManager.height
-    );
-
-    
+    taskManager.texture = loadTexture("assets/taskmanager.png");
 
     m_icons.push_back(calculator);
     m_icons.push_back(notepad);

@@ -3,13 +3,13 @@
 #include "TextureLoader.h"
 #include <cstdio>
 
-GLuint loadTexture(const std::string& path, int& outW, int& outH) {
-    int channels;
-    // flip so the image is right-side-up in OpenGL coords
+GLuint loadTexture(const std::string& path) {
+    int width, height, channels;
+    // don't flip the image
     stbi_set_flip_vertically_on_load(false);
 
     // load pixel data + load dimensions and color channels into outw, outh, channels
-    unsigned char* data = stbi_load(path.c_str(), &outW, &outH, &channels, 4);
+    unsigned char* data = stbi_load(path.c_str(), &width, &height, &channels, 4);
 
     // check if data loaded properly
     if (!data) {
@@ -23,13 +23,12 @@ GLuint loadTexture(const std::string& path, int& outW, int& outH) {
     // smoothing
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
     // wrapping
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     // load to gpu memory
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, outW, outH, 0,
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
         GL_RGBA, GL_UNSIGNED_BYTE, data);
 
     stbi_image_free(data);

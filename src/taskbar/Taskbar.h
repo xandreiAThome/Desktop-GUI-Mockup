@@ -7,8 +7,6 @@
 struct TaskbarIcon {
     std::string windowName;  // WindowManager target
     GLuint texture = 0;
-    int width = 0;
-    int height = 0;
 };
 
 class Taskbar {

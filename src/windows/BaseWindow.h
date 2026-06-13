@@ -8,10 +8,9 @@ public:
     virtual void render() = 0;        // Called by WindowManager each frame
 
     const std::string& getName() const { return windowName; }
-
     void show() { openFlag = true; }
 
 protected:
-    bool openFlag;         // Points into AppState::windows
+    bool openFlag;        
     std::string windowName;
 };
