@@ -10,10 +10,8 @@ public:
     const std::string& getName() const { return windowName; }
 
     void show() { openFlag = true; }
-    void hide() { openFlag = false; }
 
 protected:
     bool openFlag;         // Points into AppState::windows
     std::string windowName;
-
 };
