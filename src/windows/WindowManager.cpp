@@ -16,10 +16,6 @@ void WindowManager::showWindow(const std::string& name) {
 	m_windows[name]->show();
 }
 
-void WindowManager::hideWindow(const std::string& name) {
-	m_windows[name]->hide();
-}
-
 void WindowManager::renderAll() {
 	for (auto& [name, window] : m_windows) {
 		window->render();
